@@ -1,3 +1,35 @@
-- name: Set timezone to Asia/Tokyo
-  community.general.timezone:
-    name: Asia/Tokyo
+- name: Set timezone to Europe/Madrid
+  command: /usr/bin/timedatectl set-timezone Europe/Madrid
+  
+- name: Install the latest version of chrony
+  dnf:
+    name: chrony    
+    state: latest
+    
+- name: Enable and start chronyd
+  systemd:
+    name: chonyd
+    enabled: yes
+    state: started
+    
+- name: Enable ntp
+  command: /usr/bin/timedatectl set-ntp true
+
+- name: Disable SELinux
+  ansible.posix.selinux:
+    state: disabled
+  
+- name: Install the latest version of nfs-utils
+  dnf:
+    name: nfs-utils    
+    state: latest
+    
+- name: Install the latest version of nfs4-acl-tools
+  dnf:
+    name: nfs4-acl-tools    
+    state: latest
+    
+- name: Install the latest version of wget
+  dnf:
+    name: wget    
+    state: latest
