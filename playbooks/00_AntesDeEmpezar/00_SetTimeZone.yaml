@@ -1,43 +1,37 @@
-- name: Set timezone to Europe/Madrid
-  hosts: all
-  command: /usr/bin/timedatectl set-timezone Europe/Madrid
-  
-- name: Install the latest version of chrony
-  hosts: all
-  dnf:
-    name: chrony    
-    state: latest
-    
-- name: Enable and start chronyd
-  hosts: all
-  systemd:
-    name: chonyd
-    enabled: yes
-    state: restarted
-    
-- name: Enable ntp
-  hosts: all
-  command: /usr/bin/timedatectl set-ntp true
+ host: all
+ tasks:
+  - name: Set timezone to Europe/Madrid
+    command: /usr/bin/timedatectl set-timezone Europe/Madrid
 
-- name: Disable SELinux
-  hosts: all
-  ansible.posix.selinux:
-    state: disabled
-  
-- name: Install the latest version of nfs-utils
-  hosts: all
-  dnf:
-    name: nfs-utils    
-    state: latest
-    
-- name: Install the latest version of nfs4-acl-tools
-  hosts: all
-  dnf:
-    name: nfs4-acl-tools    
-    state: latest
-    
-- name: Install the latest version of wget
-  hosts: all
-  dnf:
-    name: wget    
-    state: latest
+  - name: Install the latest version of chrony
+    dnf:
+      name: chrony    
+      state: latest
+
+  - name: Enable and start chronyd
+    systemd:
+      name: chronyd
+      enabled: yes
+      state: restarted
+
+  - name: Enable ntp
+    command: /usr/bin/timedatectl set-ntp true
+
+  - name: Disable SELinux
+    ansible.posix.selinux:
+      state: disabled
+
+  - name: Install the latest version of nfs-utils
+    dnf:
+      name: nfs-utils    
+      state: latest
+
+  - name: Install the latest version of nfs4-acl-tools
+    dnf:
+      name: nfs4-acl-tools    
+      state: latest
+
+  - name: Install the latest version of wget
+    dnf:
+      name: wget    
+      state: latest
