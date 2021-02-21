@@ -13,7 +13,8 @@
        systemd:
          name: chronyd
          enabled: yes
-         state: restarted
+         state: started
+       become: yes
 
      - name: Enable ntp
        command: /usr/bin/timedatectl set-ntp true
