@@ -1,1 +1,2 @@
-- include_tasks: 00-PreConfiguration.yaml
+- tasks:
+  - include_tasks: 00-PreConfiguration.yaml
