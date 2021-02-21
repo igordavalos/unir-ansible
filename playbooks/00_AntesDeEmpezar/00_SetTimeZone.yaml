@@ -28,13 +28,16 @@
        dnf:
          name: nfs-utils    
          state: latest
+       become: yes
 
      - name: Install the latest version of nfs4-acl-tools
        dnf:
          name: nfs4-acl-tools    
          state: latest
+       become:yes
 
      - name: Install the latest version of wget
        dnf:
          name: wget    
          state: latest
+       become: yes
