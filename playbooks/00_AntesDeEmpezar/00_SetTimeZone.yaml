@@ -1,4 +1,4 @@
- - host: all
+ - hosts: all
    tasks:
      - name: Set timezone to Europe/Madrid
        command: /usr/bin/timedatectl set-timezone Europe/Madrid
