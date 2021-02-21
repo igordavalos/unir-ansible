@@ -7,7 +7,7 @@
        dnf:
          name: chrony    
          state: latest
-         become: yes
+       become: yes
 
      - name: Enable and start chronyd
        systemd:
