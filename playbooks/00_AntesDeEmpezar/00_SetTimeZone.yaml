@@ -18,7 +18,7 @@
        command: /usr/bin/timedatectl set-ntp true
 
      - name: Disable SELinux
-       ansible.posix.selinux:
+       selinux:
          state: disabled
 
      - name: Install the latest version of nfs-utils
