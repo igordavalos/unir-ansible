@@ -10,7 +10,7 @@
   systemd:
     name: chonyd
     enabled: yes
-    state: started
+    state: restarted
     
 - name: Enable ntp
   command: /usr/bin/timedatectl set-ntp true
