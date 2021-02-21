@@ -34,7 +34,7 @@
        dnf:
          name: nfs4-acl-tools    
          state: latest
-       become:yes
+       become: yes
 
      - name: Install the latest version of wget
        dnf:
