@@ -28,9 +28,10 @@
          mode: 0644
        become: yes
        
-     - name: Kick exportfs if /etc/exports changed
+     - name: Reload exportfs if /etc/exports changed
        command: /usr/sbin/exportfs -ra
        when: exports.changed
+       become: yes
 
      - name: firewall configuration
        firewalld:
