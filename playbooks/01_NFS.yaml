@@ -1,1 +1,20 @@
-dnf install nfs-utils net-tools -y
+ - hosts: nfs
+   tasks:
+     - name: Install the latest version of nfs-utils
+       dnf:
+         name: nfs-utils    
+         state: latest
+       become: yes
+
+     - name: Install the latest version of net-tools
+       dnf:
+         name: net-tools    
+         state: latest
+       become: yes
+
+     - name: Enable and start nfs-server
+       systemd:
+         name: nfs-server
+         enabled: yes
+         state: started
+       become: yes
