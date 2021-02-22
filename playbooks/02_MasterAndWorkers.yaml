@@ -1,4 +1,4 @@
-- hosts:
+- hosts: master:workers
   tasks:
     - name: Copy hosts file.
       template:
