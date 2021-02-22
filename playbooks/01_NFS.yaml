@@ -26,12 +26,14 @@
          owner: root
          group: root
          mode: 0644
-       register: exports
        become: yes
        
-     - name: Reload exportfs if /etc/exports changed
-       command: /usr/sbin/exportfs -ra
-       when: exports.changed
+     - name: Reload exportfs
+       command: /usr/sbin/exportfs -r
+       become: yes
+       
+     - name: Show exportfs
+       command: /usr/sbin/exportfs -s
        become: yes
 
      - name: firewall configuration
