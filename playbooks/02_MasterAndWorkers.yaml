@@ -1,3 +1,10 @@
 - hosts:
   tasks:
-    -
+    - name: Copy exports file.
+      template:
+        src: ./dns_hosts.j2
+        dest: /etc/hosts
+        owner: root
+        group: root
+        mode: 0644
+    become: yes
