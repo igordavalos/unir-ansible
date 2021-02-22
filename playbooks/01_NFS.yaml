@@ -31,4 +31,8 @@
          - "nfs"
          - "rpc-bind"
          - "mountd"
-       notify: firewalld reload
+       
+       - name: reload service firewalld
+         systemd:
+         name: firewalld
+         state: reloaded
