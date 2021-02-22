@@ -17,9 +17,9 @@
       
     - name: Add masquerade to firewall
       firewalld:
-      masquerade: yes
-      state: enabled
-      permanent: true
+        masquerade: yes
+        state: enabled
+        permanent: true
       become: yes
 
     - name: reload service firewalld
