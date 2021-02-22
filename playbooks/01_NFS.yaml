@@ -27,6 +27,10 @@
          group: root
          mode: 0644
        become: yes
+       
+     - name: Kick exportfs if /etc/exports changed
+       command: /usr/sbin/exportfs -ra
+       when: exports.changed
 
      - name: firewall configuration
        firewalld:
