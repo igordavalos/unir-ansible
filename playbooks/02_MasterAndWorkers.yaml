@@ -11,9 +11,8 @@
       
     - name: Add the br_netfilter module
       modprobe:
-      name: br_netfilter
-      become: yes
-      
+        name: br_netfilter
+      become: yes      
       
     - name: Add masquerade to firewall
       firewalld:
