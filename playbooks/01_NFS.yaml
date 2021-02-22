@@ -18,3 +18,17 @@
          enabled: yes
          state: started
        become: yes
+
+
+     - name: firewall configuration
+       firewalld:
+         service: "{{ item }}"
+         permanent: yes
+         state: enabled
+         immediate: yes
+       become: true
+       with_items:
+         - "nfs"
+         - "rpc-bind"
+         - "mountd"
+       notify: firewalld reload
