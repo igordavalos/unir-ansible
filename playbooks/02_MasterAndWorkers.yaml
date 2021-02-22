@@ -8,3 +8,8 @@
         group: root
         mode: 0644
       become: yes
+      
+    - name: Add the br_netfilter module
+      modprobe:
+      name: br_netfilter
+      become: yes
