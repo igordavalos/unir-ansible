@@ -32,7 +32,8 @@
          - "rpc-bind"
          - "mountd"
        
-       - name: reload service firewalld
-         systemd:
+     - name: reload service firewalld
+       systemd:
          name: firewalld
          state: reloaded
+       become: yes
