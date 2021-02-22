@@ -13,3 +13,17 @@
       modprobe:
       name: br_netfilter
       become: yes
+      
+      
+    - name: Add masquerade to firewall
+      firewalld:
+      masquerade: yes
+      state: enabled
+      permanent: true
+      become: yes
+
+    - name: reload service firewalld
+      systemd:
+        name: firewalld
+        state: reloaded
+      become: yes
