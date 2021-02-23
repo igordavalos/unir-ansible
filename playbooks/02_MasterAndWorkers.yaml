@@ -50,15 +50,32 @@
       
     - name: Get docker repo
       shell: dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+      warn: false
       become: yes      
 
     - name: Install docker
+      warn: false
       shell: dnf install docker-ce-19.03.14-3.el8 containerd.io -y
       become: yes
       
     - name: Enable and start docker
       systemd:
         name: docker
+        enabled: yes
+        state: started
+      become: yes
+      
+      
+      
+      
+    - name: Install kubelet
+      shell: dnf install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+      warn: false
+      become: yes
+      
+    - name: Enable and start kubelet
+      systemd:
+        name: kubelet
         enabled: yes
         state: started
       become: yes
