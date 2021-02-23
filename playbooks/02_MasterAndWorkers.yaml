@@ -46,16 +46,13 @@
       
     - name: Delete swap line from /etc/fstab
       shell: sed -i '/swap/d' /etc/fstab
-      warn: false
       become: yes
       
     - name: Get docker repo
       shell: dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
-      warn: false
       become: yes      
 
     - name: Install docker
-      warn: false
       shell: dnf install docker-ce-19.03.14-3.el8 containerd.io -y
       become: yes
       
@@ -77,7 +74,6 @@
       
     - name: Install kubelet
       shell: dnf install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
-      warn: false
       become: yes
       
     - name: Enable and start kubelet
