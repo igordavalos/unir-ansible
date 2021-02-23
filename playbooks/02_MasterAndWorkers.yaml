@@ -44,4 +44,6 @@
       command: /usr/sbin/swapoff  -a
       become: yes
       
+    - name: Delete swap line from /etc/fstab
+      shell: sed -i '/swap/d' /etc/fstab
       
