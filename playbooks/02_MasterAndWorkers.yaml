@@ -48,3 +48,10 @@
       shell: sed -i '/swap/d' /etc/fstab
       become: yes
       
+    - name: Get docker repo
+      shell: dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+      become: yes      
+
+    - name: Install docker
+      shell: dnf install docker-ce-19.03.14-3.el8 containerd.io -y
+      become: yes
