@@ -72,8 +72,14 @@
         mode: 0644
       become: yes
       
-    - name: Install kubelet
-      shell: dnf install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+    - name: Install kubelet,kubeadm and kubectl
+      dnf:
+        name:
+          - kubelet
+          - kubeadm
+          - kubectl
+        state: latest
+        exclude: kubernetes
       become: yes
       
     - name: Enable and start kubelet
