@@ -35,3 +35,7 @@
         group: root
         mode: 0644
       become: yes
+      
+    - name: Applying k8s.conf
+      command: /usr/sbin/sysctl --system
+      become: yes
