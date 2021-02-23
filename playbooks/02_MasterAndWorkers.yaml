@@ -38,4 +38,10 @@
       
     - name: Applying k8s.conf
       command: /usr/sbin/sysctl --system
+      become: yes      
+      
+    - name: Deactivate swapp
+      command: /usr/sbin/swapoff  -a
       become: yes
+      
+      
