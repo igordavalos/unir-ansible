@@ -46,4 +46,5 @@
       
     - name: Delete swap line from /etc/fstab
       shell: sed -i '/swap/d' /etc/fstab
+      become: yes
       
