@@ -55,3 +55,10 @@
     - name: Install docker
       shell: dnf install docker-ce-19.03.14-3.el8 containerd.io -y
       become: yes
+      
+    - name: Enable and start docker
+      systemd:
+        name: docker
+        enabled: yes
+        state: started
+      become: yes
