@@ -65,8 +65,14 @@
         state: started
       become: yes
       
-      
-      
+    - name: Configure kubernetes repo
+      template:
+        src: ./kubernetes_repo.j2
+        dest: /etc/yum.repos.d/kubernetes.repo
+        owner: root
+        group: root
+        mode: 0644
+      become: yes
       
     - name: Install kubelet
       shell: dnf install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
