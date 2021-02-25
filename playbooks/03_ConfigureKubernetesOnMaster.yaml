@@ -27,13 +27,13 @@
       
     - name: Enable access from workers
       firewalld:
-        rich_rule: rule family=ipv4 source address=192.168.1.111/32 accept
+        rich_rule: "{{ item }}"
         permanent: yes
         immediate: yes
         state: enabled
       become: yes
-      #with_item:
-      #  - "rule family=ipv4 source address=192.168.1.111/32 accept"
+      with_item:
+        - "rule family=ipv4 source address=192.168.1.111/32 accept"
         
         #rich_rule: "{{ item }}"
         
