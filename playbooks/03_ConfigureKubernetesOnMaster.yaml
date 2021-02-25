@@ -1,3 +1,47 @@
 - hosts: master
   tasks:
-    - name:
+    - name: firewall configuration
+       firewalld:
+         port: "{{ item }}"
+         permanent: yes
+         state: enabled
+         immediate: yes
+       become: yes
+       with_items:
+         - "6443/tcp"
+         - "2379-2380/tcp"
+         - "10250/tcp"
+         - "10251/tcp"
+         - "10252/tcp"
+         - "10255/tcp"
+       
+    - name: reload service firewalld
+      systemd:
+        name: firewalld
+        state: reloaded
+      become: yes
+       
+    - name: Configure Kudeadm
+      shell: kubeadm config images pull
+      become: yes
+      
+    - name: Enable access from workers 
+      firewalld:
+        rich_rule: 
+        port: "{{ item }}"
+        permanent: yes
+      become: yes
+      with_item:
+        - "rule family=ipv4 source address=192.168.1.111/32 accept"
+        
+    - name: reload service firewalld
+      systemd:
+        name: firewalld
+        state: reloaded
+      become: yes
+        
+    #- name: Enable access from workers
+    #  shell: firewall-cmd --permanent --add-rich-rule 'rule family=ipv4 source address=192.168.1.138/32 accept'
+    #  become: yes
+      
+      
