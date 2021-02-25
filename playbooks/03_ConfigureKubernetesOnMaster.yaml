@@ -25,10 +25,11 @@
       shell: kubeadm config images pull
       become: yes
       
-    - name: Enable access from workers 
+    - name: Enable access from workers
       firewalld:
         rich_rule: "{{ item }}"
         permanent: yes
+        state: enabled
       become: yes
       with_item:
         - "rule family=ipv4 source address=192.168.1.111/32 accept"
