@@ -79,7 +79,7 @@
           - kubeadm
           - kubectl
         state: latest
-        exclude: kubernetes
+        disable_excludes: kubernetes
       become: yes
       
     - name: Enable and start kubelet
