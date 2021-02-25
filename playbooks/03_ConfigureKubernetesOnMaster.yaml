@@ -59,23 +59,17 @@
       become: yes
       
     - name: End cluster configuration 1
-      shell: mkdir -p $HOME/.kube
+      shell: mkdir -p /root/.kube
       become: yes
       
     - name: End cluster configuration 2
-      shell: sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+      shell: sudo cp -i /etc/kubernetes/admin.conf /root/.kube/config
       become: yes
       
     - name: End cluster configuration 3
-      shell: sudo chown $(id -u):$(id -g) $HOME/.kube/config
+      shell: sudo chown $(id -u):$(id -g) /root/.kube/config
       become: yes
       
     - name: Get nodes
       shell: kubectl get nodes
       become: yes
-      
-      
-    
-  #mkdir -p $HOME/.kube
-  #sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-  #sudo chown $(id -u):$(id -g) $HOME/.kube/config
