@@ -39,7 +39,7 @@
         state: reloaded
       become: yes
         
-    - name: Enable access to localhost work containers
+    - name: Enable access to localhost from containers
       firewalld:
         rich_rule: rule family=ipv4 source address=172.17.0.0/16 accept
         zone: public
