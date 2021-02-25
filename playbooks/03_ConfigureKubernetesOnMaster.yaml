@@ -1,13 +1,13 @@
 - hosts: master
   tasks:
     - name: firewall configuration
-       firewalld:
-         port: "{{ item }}"
-         permanent: yes
-         state: enabled
-         immediate: yes
-       become: yes
-       with_items:
+      firewalld:
+        port: "{{ item }}"
+        permanent: yes
+        state: enabled
+        immediate: yes
+      become: yes
+      with_items:
          - "6443/tcp"
          - "2379-2380/tcp"
          - "10250/tcp"
