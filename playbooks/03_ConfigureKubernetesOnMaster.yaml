@@ -27,8 +27,7 @@
       
     - name: Enable access from workers 
       firewalld:
-        rich_rule: 
-        port: "{{ item }}"
+        rich_rule: "{{ item }}"
         permanent: yes
       become: yes
       with_item:
