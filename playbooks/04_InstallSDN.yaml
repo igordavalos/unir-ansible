@@ -1,3 +1,14 @@
 - hosts: master
   tasks:
-    - 
+    - name: Install Tigera
+      shell: kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+      become: yes
+ 
+    - name: Get calico custom resources
+      shell: wget https://docs.projectcalico.org/manifests/custom-resources.yaml
+      become: yes      
+      
+    - name: Install calico
+      shell: kubectl apply -f custom-resources.yaml
+      become: yes     
+      
