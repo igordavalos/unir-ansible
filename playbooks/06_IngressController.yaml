@@ -1,0 +1,17 @@
+- hosts: master
+  tasks:      
+    - name: Install ingress controller
+      shell: kubectl apply -f https://raw.githubusercontent.com/haproxytech/kubernetes-ingress/v1.5/deploy/haproxy-ingress.yaml
+      become: yes
+      
+    - name: Get namespaces
+      shell: kubectl get namespaces
+      become: yes
+      
+    - name: Get pods
+      shell: kubectl get pods --namespace=haproxy-controller
+      become: yes
+      
+    - name: Get services
+      shell: kubectl get svc -A
+      become: yes
