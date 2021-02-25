@@ -15,7 +15,7 @@
          - "10252/tcp"
          - "10255/tcp"
        
-    - name: reload service firewalld
+    - name: reload firewalld
       systemd:
         name: firewalld
         state: reloaded
@@ -27,24 +27,35 @@
       
     - name: Enable access from workers
       firewalld:
-        rich_rule: "{{ item }}"
+        rich_rule: rule family=ipv4 source address=192.168.1.111/32 accept
         permanent: yes
         immediate: yes
         state: enabled
       become: yes
-      with_item:
-        - "rule family=ipv4 source address=192.168.1.111/32 accept"
         
-        #rich_rule: "{{ item }}"
-        
-    - name: reload service firewalld
+    - name: reload firewalld
       systemd:
         name: firewalld
         state: reloaded
       become: yes
         
-    #- name: Enable access from workers
-    #  shell: firewall-cmd --permanent --add-rich-rule 'rule family=ipv4 source address=192.168.1.138/32 accept'
-    #  become: yes
-      
+    - name: Enable access to localhost work containers
+      firewalld:
+        rich_rule: rule family=ipv4 source address=172.17.0.0/16 accept
+        zone: public
+        permanent: yes
+        immediate: yes
+        state: enabled
+      become: yes
+        
+    - name: reload firewalld
+      systemd:
+        name: firewalld
+        state: reloaded
+      become: yes
+        
+    - name: Install CNI (Container Network Interface) plugin
+      shell: kubeadm init --pod-network-cidr 192.169.0.0/16
+      become: yes
+    
       
