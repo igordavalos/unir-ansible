@@ -78,7 +78,6 @@
           - kubelet
           - kubeadm
           - kubectl
-        state: latest
         disable_excludes: kubernetes
       become: yes
       
