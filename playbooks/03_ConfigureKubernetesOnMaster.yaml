@@ -56,7 +56,7 @@
       become: yes
         
     - name: Install CNI (Container Network Interface) plugin
-      shell: kubeadm init --pod-network-cidr 192.169.0.0/16 2>&1 | tee kudeadm_init_output.txt
+      shell: kubeadm init --pod-network-cidr 192.169.0.0/16 2>&1 | tee ./kudeadm_init_output.txt
       become: yes
       
     - name: End cluster configuration 1
