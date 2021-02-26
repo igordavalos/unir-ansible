@@ -21,7 +21,7 @@
         permanent: true
       become: yes
 
-    - name: reload service firewalld
+    - name: reload firewalld
       systemd:
         name: firewalld
         state: reloaded
