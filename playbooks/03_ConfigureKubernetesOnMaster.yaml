@@ -14,7 +14,7 @@
          - "10251/tcp"
          - "10252/tcp"
          - "10255/tcp"
-         - "22/ssh"
+         - "22/tcp"
        
     - name: reload firewalld
       systemd:
