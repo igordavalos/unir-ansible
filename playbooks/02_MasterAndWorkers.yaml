@@ -27,7 +27,7 @@
         state: reloaded
       become: yes
 
-    - name: Copy hosts file.
+    - name: Copy k8f file
       template:
         src: ./k8f.j2
         dest: /etc/sysctl.d/k8s.conf
