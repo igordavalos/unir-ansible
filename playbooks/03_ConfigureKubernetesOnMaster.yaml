@@ -1,5 +1,11 @@
 - hosts: master
   tasks:
+    - name: reload firewalld
+      systemd:
+        name: firewalld
+        state: reloaded
+      become: yes
+      
     - name: firewall configuration
       firewalld:
         port: "{{ item }}"
