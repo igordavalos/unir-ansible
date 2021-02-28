@@ -36,12 +36,11 @@
        command: /usr/sbin/exportfs -s
        become: yes
 
-     - name: Restarting firewalld
+     - name: reload service firewalld
        systemd:
          name: firewalld
-         state: restarted
-         enabled: true
-         daemon_reload: true
+         state: reloaded
+       become: yes
     
      - name: firewall configuration
        firewalld:
