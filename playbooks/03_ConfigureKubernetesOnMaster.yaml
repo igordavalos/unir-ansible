@@ -34,7 +34,7 @@
       
     - name: Enable access from worker01
       firewalld:
-        rich_rule: rule family=ipv4 source address=40.114.144.81/32 accept
+        rich_rule: rule family=ipv4 source address=20.71.105.188/32 accept
         permanent: yes
         immediate: yes
         state: enabled
@@ -42,7 +42,7 @@
       
     - name: Enable access from worker02
       firewalld:
-        rich_rule: rule family=ipv4 source address=168.63.8.125/32 accept
+        rich_rule: rule family=ipv4 source address=20.71.105.212/32 accept
         permanent: yes
         immediate: yes
         state: enabled
@@ -83,8 +83,4 @@
       
     - name: End cluster configuration 3
       shell: sudo chown $(id -u):$(id -g) /home/adminUsername/.kube/config
-      become: yes
-      
-    - name: Get nodes
-      shell: kubectl get nodes
       become: yes
