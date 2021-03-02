@@ -25,6 +25,7 @@
       become: yes
        
     - name: Join the cluster
-      shell: kubeadm join 10.0.1.10:6443 --token q1aci3.vsocxuq2ng9atw4k --discovery-token-ca-cert-hash sha256:b27de9ae8740a52307a7a0ef7d52c66fff88c57289f9f53abc427781aa376afe
+      shell: kubeadm join 10.0.1.10:6443 --token s7odyr.rg3c7rpgunj7buai     --discovery-token-ca-cert-hash sha256:3874363aa1c291f5b00dc0439e7d6c5b9ffc0718635f54bf58b9171a2515606d
       become: yes
-      
+
+
