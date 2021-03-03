@@ -1,9 +1,9 @@
 - hosts: master
   tasks:
     
-   #- name: End cluster configuration as root user
-   #  shell: sudo -i
-   #  become: yes
+    - name: End cluster configuration as root user
+      shell: sudo -i
+      become: yes
       
     - name: End cluster configuration 1
       shell: mkdir -p /root/.kube
