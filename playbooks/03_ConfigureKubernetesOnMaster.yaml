@@ -34,15 +34,15 @@
      
     - name: Enable access from worker01
       firewalld:
-        rich_rule: rule family=ipv4 source address=20.71.105.188/32 accept
+        rich_rule: rule family=ipv4 source address=20.71.125.248/32 accept
         permanent: yes
         immediate: yes
         state: enabled
       become: yes
      
     - name: Enable access from worker02
-       firewalld:
-        rich_rule: rule family=ipv4 source address=20.71.105.212/32 accept
+      firewalld:
+        rich_rule: rule family=ipv4 source address=20.71.125.247/32 accept
         permanent: yes
         immediate: yes
         state: enabled
