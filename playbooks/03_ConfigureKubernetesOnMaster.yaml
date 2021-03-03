@@ -73,14 +73,9 @@
       shell: kubeadm init --pod-network-cidr 192.169.0.0/16 2>&1 | tee ./kudeadm_init_output.txt
       become: yes
     
-    - name: End cluster configuration as root user
-      shell: sudo -i
-      
-    - name: End cluster configuration 1
-      shell: mkdir -p /root/.kube
-      
-    - name: End cluster configuration 2
-      shell: cp -i /etc/kubernetes/admin.conf /root/.kube/config
-      
-    - name: End cluster configuration 3
-      shell: chown $(id -u):$(id -g) /root/.kube/config
+    # La última configuración del cluster se ha realizado a mano con el usuario root del nodo master.
+    # Se han ejecutado los siguientes comandos:
+    #
+    # [root@master ~]# mkdir -p /root/.kube
+    # [root@master ~]# cp -i /etc/kubernetes/admin.conf /root/.kube/config
+    # [root@master ~]# chown $(id -u):$(id -g) /root/.kube/config
