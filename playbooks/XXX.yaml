@@ -1,0 +1,15 @@
+- hosts: master
+  tasks:
+    
+   #- name: End cluster configuration as root user
+   #  shell: sudo -i
+   #  become: yes
+      
+    - name: End cluster configuration 1
+      shell: mkdir -p /root/.kube
+      
+    - name: End cluster configuration 2
+      shell: cp -i /etc/kubernetes/admin.conf /root/.kube/config
+      
+    - name: End cluster configuration 3
+      shell: chown $(id -u):$(id -g) /root/.kube/config
