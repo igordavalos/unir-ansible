@@ -1,86 +1,86 @@
 - hosts: master
   tasks:
-   #- name: reload firewalld
-   #  systemd:
-   #    name: firewalld
-   #    state: reloaded
-   #  become: yes
-   #  
-   #- name: firewall configuration
-   #  firewalld:
-   #    port: "{{ item }}"
-   #    permanent: yes
-   #    state: enabled
-   #    immediate: yes
-   #  become: yes
-   #  with_items:
-   #     - "6443/tcp"
-   #     - "2379-2380/tcp"
-   #     - "10250/tcp"
-   #     - "10251/tcp"
-   #     - "10252/tcp"
-   #     - "10255/tcp"
-   #     - "22/tcp"
-   #   
-   #- name: reload firewalld
-   #  systemd:
-   #    name: firewalld
-   #    state: reloaded
-   #  become: yes
-   #   
-   #- name: Configure Kudeadm
-   #  shell: kubeadm config images pull
-   #  become: yes
-   #  
-   #- name: Enable access from worker01
-   #  firewalld:
-   #    rich_rule: rule family=ipv4 source address=20.71.105.188/32 accept
-   #    permanent: yes
-   #    immediate: yes
-   #    state: enabled
-   #  become: yes
-   #  
-   #- name: Enable access from worker02
-   #  firewalld:
-   #    rich_rule: rule family=ipv4 source address=20.71.105.212/32 accept
-   #    permanent: yes
-   #    immediate: yes
-   #    state: enabled
-   #  become: yes
-   #    
-   #- name: reload firewalld
-   #  systemd:
-   #    name: firewalld
-   #    state: reloaded
-   #  become: yes
-   #    
-   #- name: Enable access to localhost from containers
-   #  firewalld:
-   #    rich_rule: rule family=ipv4 source address=172.17.0.0/16 accept
-   #    zone: public
-   #    permanent: yes
-   #    immediate: yes
-   #    state: enabled
-   #  become: yes
-   #    
-   #- name: reload firewalld
-   #  systemd:
-   #    name: firewalld
-   #    state: reloaded
-   #  become: yes
-   #    
-   #- name: Install CNI (Container Network Interface) plugin
-   #  shell: kubeadm init --pod-network-cidr 192.169.0.0/16 2>&1 | tee ./kudeadm_init_output.txt
-   #  become: yes
+    - name: reload firewalld
+       systemd:
+       name: firewalld
+       state: reloaded
+      become: yes
+     
+    - name: firewall configuration
+      firewalld:
+        port: "{{ item }}"
+        permanent: yes
+        state: enabled
+        immediate: yes
+      become: yes
+      with_items:
+        - "6443/tcp"
+        - "2379-2380/tcp"
+        - "10250/tcp"
+        - "10251/tcp"
+        - "10252/tcp"
+        - "10255/tcp"
+        - "22/tcp"
+      
+    - name: reload firewalld
+      systemd:
+        name: firewalld
+        state: reloaded
+      become: yes
+      
+    - name: Configure Kudeadm
+      shell: kubeadm config images pull
+      become: yes
+     
+    - name: Enable access from worker01
+      firewalld:
+        rich_rule: rule family=ipv4 source address=20.71.105.188/32 accept
+        permanent: yes
+        immediate: yes
+        state: enabled
+      become: yes
+     
+    - name: Enable access from worker02
+       firewalld:
+        rich_rule: rule family=ipv4 source address=20.71.105.212/32 accept
+        permanent: yes
+        immediate: yes
+        state: enabled
+      become: yes
+       
+    - name: reload firewalld
+      systemd:
+        name: firewalld
+        state: reloaded
+      become: yes
+       
+    - name: Enable access to localhost from containers
+      firewalld:
+        rich_rule: rule family=ipv4 source address=172.17.0.0/16 accept
+        zone: public
+        permanent: yes
+        immediate: yes
+        state: enabled
+      become: yes
+       
+    - name: reload firewalld
+      systemd:
+        name: firewalld
+        state: reloaded
+      become: yes
+       
+    - name: Install CNI (Container Network Interface) plugin
+      shell: kubeadm init --pod-network-cidr 192.169.0.0/16 2>&1 | tee ./kudeadm_init_output.txt
+      become: yes
+    
+    - name: End cluster configuration as root user
+      shell: sudo -i
       
     - name: End cluster configuration 1
-      shell: mkdir -p /home/adminUsername/.kube
-      #become: yes
+      shell: mkdir -p /root/.kube
       
     - name: End cluster configuration 2
-      shell: sudo cp -i /etc/kubernetes/admin.conf /home/adminUsername/.kube/config
-      #become: yes
+      shell: cp -i /etc/kubernetes/admin.conf /root/.kube/config
       
     - name: End cluster configuration 3
-      shell: sudo chown $(id -u):$(id -g) /home/adminUsername/.kube/config
-      #become: yes
+      shell: chown $(id -u):$(id -g) /root/.kube/config
