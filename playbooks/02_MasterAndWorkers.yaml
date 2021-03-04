@@ -20,6 +20,18 @@
         state: enabled
         permanent: true
       become: yes
+      
+      # Esta tarea se ejecuta aquí para abrir los puertos necesarios para instalar Calico en Azure
+    - name: firewall configuration
+      firewalld:
+        port: "{{ item }}"
+        permanent: yes
+        state: enabled
+        immediate: yes
+      become: yes
+      with_items:
+        - "8285/udp"
+        - "8472/udp"
 
     - name: reload firewalld
       systemd:
