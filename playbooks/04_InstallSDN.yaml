@@ -1,14 +1,39 @@
-- hosts: master
+- hosts: master:workers
   tasks:
-    - name: Install Tigera
-      shell: kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+    # Tareas para instalar Calico en Azure
+    
+    - name: firewall configuration
+      firewalld:
+        port: "{{ item }}"
+        permanent: yes
+        state: enabled
+        immediate: yes
       become: yes
+      with_items:
+        - "8285/udp"
+        - "8472/udp"
+              
+    - name: reload firewalld
+      systemd:
+        name: firewalld
+        state: reloaded
+      become: yes
+      
+    - name: Download and apply canal.yaml
+      shell: kubectl apply -f https://docs.projectcalico.org/manifests/canal.yaml
+      become: yes
+      
+    # Tareas para instalar Calico en local
+    
+    #- name: Install Tigera
+    #  shell: kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+    #  become: yes
  
-    - name: Get calico custom resources
-      shell: wget https://docs.projectcalico.org/manifests/custom-resources.yaml
-      become: yes      
-      
-    - name: Install calico
-      shell: kubectl apply -f custom-resources.yaml
-      become: yes     
-      
+    #- name: Get calico custom resources
+    #  shell: wget https://docs.projectcalico.org/manifests/custom-resources.yaml
+    #  become: yes      
+    #  
+    #- name: Install calico
+    #  shell: kubectl apply -f custom-resources.yaml
+    #  become: yes     
+     
