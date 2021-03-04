@@ -1,6 +1,7 @@
 - hosts: master:workers
   tasks:
     # Tareas para instalar Calico en Azure
+    # La apertura de puertos necesaria se ha hecho en el fichero 02_MasterAndWorkers.yaml
       
     - name: Download and apply canal.yaml
       shell: kubectl apply -f https://docs.projectcalico.org/manifests/canal.yaml
